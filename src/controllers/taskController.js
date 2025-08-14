@@ -86,5 +86,16 @@ function updateTask(req, res) {
   return res.json(updated);
 }
 
+function deleteTask(req, res){
+  const id = parseInt(req.params.id, 10);
+  if(Number.isNaN(id)) return res.status(400).json({ error: 'Id Invalido'});
+
+  const ok = Tasks.remove(id);
+  if(!ok) return res.status(404).json({error: 'Tarefa não encontrada'});
+
+  return res.status(204).send();
+  
+}
+
 // Exportamos a função fora da definição
-module.exports = { createTask, getAllTasks, getTaskById, updateTask };
+module.exports = { createTask, getAllTasks, getTaskById, updateTask, deleteTask };
