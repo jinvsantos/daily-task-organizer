@@ -35,9 +35,18 @@ function update(id, data) {
   return tasks[index];
 }
 
+function remove(id){
+  const index = tasks.findIndex(t => Number(t.id) === Number(id));
+  if(index === -1) return false;
+  tasks.splice(index, 1);
+  return true
+
+}
+
 module.exports = {
   create,
   getAll,
   getById,
-  update
+  update,
+  remove
 };
